@@ -23,8 +23,6 @@ const keplerGlGetState = state => {
 }
 
 function App() {
-  const width = document.getElementById('root').offsetWidth;
-  const height = document.getElementById('root').offsetHeight;
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle
@@ -35,7 +33,10 @@ function App() {
           return document.getElementById('root')
         }}
       >
-         
+         <AutoSizer>
+        {({ height, width }) => {
+        console.log([height, width])
+          return ( 
             <KeplerGl
               mapboxApiAccessToken={AUTH_TOKENS.MAPBOX_TOKEN}
               id="map"
@@ -48,7 +49,8 @@ function App() {
               height={ height? height:1024}
               version={'v20.03.02'}
             />
-           
+           )}}
+      </AutoSizer>
       </GlobalStyle>
     </ThemeProvider>
   );
